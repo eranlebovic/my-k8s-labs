@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{},"name":"webapp-ingress","namespace":"default"},"spec":{"ingressClassName":"nginx","rules":[{"host":"webapp.local","http":{"paths":[{"backend":{"service":{"name":"webapp","port":{"number":80}}},"path":"/","pathType":"Prefix"}]}}],"tls":[{"hosts":["webapp.local"],"secretName":"webapp-tls-secret"}]}}
+  creationTimestamp: "2026-01-24T19:32:58Z"
+  generation: 3
+  name: webapp-ingress
+  namespace: default
+  resourceVersion: "332914"
+  uid: 8c1393fa-015b-452f-9058-a4833ea32141
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: webapp.local
+    http:
+      paths:
+      - backend:
+          service:
+            name: webapp
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - webapp.local
+    secretName: webapp-tls-secret
+status:
+  loadBalancer:
+    ingress:
+    - ip: 100.73.7.22
