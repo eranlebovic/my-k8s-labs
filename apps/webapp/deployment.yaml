@@ -2,8 +2,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: webapp-html
-metadata:
-  name: webapp-html
 data:
   index.html: |
     <!DOCTYPE html>
@@ -22,7 +20,7 @@ data:
           display: flex;
           align-items: center;
           justify-content: center;
-          font-family: 'Arial Black', Gadget, sans-serif;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
           background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
           background-size: 400% 400%;
           animation: rainbow 10s ease infinite;
@@ -30,23 +28,25 @@ data:
           text-align: center;
         }
         .container {
-          background: rgba(0, 0, 0, 0.6);
-          padding: 50px;
-          border-radius: 20px;
-          border: 5px solid gold;
-          box-shadow: 0 0 50px gold;
+          background: rgba(0, 0, 0, 0.7);
+          padding: 60px;
+          border-radius: 30px;
+          border: 8px solid gold;
+          box-shadow: 0 0 70px gold;
         }
-        h1 { font-size: 5em; margin: 0; text-shadow: 3px 3px #ff0000; }
-        p { font-size: 1.5em; letter-spacing: 5px; }
-        .confetti { font-size: 3em; }
+        h1 { font-size: 4.5em; margin: 0; text-shadow: 4px 4px #ff0000; letter-spacing: 2px; }
+        .subtitle { font-size: 1.8em; margin-top: 20px; color: #00fff2; font-weight: bold; }
+        .footer { font-size: 1.2em; margin-top: 30px; opacity: 0.8; }
+        .decor { font-size: 3em; margin-bottom: 10px; }
       </style>
     </head>
     <body>
       <div class="container">
-        <div class="confetti">🎉 🚀 🎊</div>
+        <div class="decor">*** PARTY MODE ***</div>
         <h1>WELCOME TO ERAN'S LAB!</h1>
-        <p>DEVOPS ENGINEER | 9950X POWERED</p>
-        <div class="confetti">✨ 🕺 ✨</div>
+        <div class="subtitle">DEVOPS ENGINEER | 9950X POWERED</div>
+        <div class="footer">STABLE & SYNCED</div>
+        <div class="decor">*******************</div>
       </div>
     </body>
     </html>
