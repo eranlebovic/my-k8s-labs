@@ -1,9 +1,60 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: webapp-html
+metadata:
+  name: webapp-html
+data:
+  index.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Eran's DevOps Party</title>
+      <style>
+        @keyframes rainbow {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        body {
+          margin: 0;
+          height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: 'Arial Black', Gadget, sans-serif;
+          background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+          background-size: 400% 400%;
+          animation: rainbow 10s ease infinite;
+          color: white;
+          text-align: center;
+        }
+        .container {
+          background: rgba(0, 0, 0, 0.6);
+          padding: 50px;
+          border-radius: 20px;
+          border: 5px solid gold;
+          box-shadow: 0 0 50px gold;
+        }
+        h1 { font-size: 5em; margin: 0; text-shadow: 3px 3px #ff0000; }
+        p { font-size: 1.5em; letter-spacing: 5px; }
+        .confetti { font-size: 3em; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="confetti">🎉 🚀 🎊</div>
+        <h1>WELCOME TO ERAN'S LAB!</h1>
+        <p>DEVOPS ENGINEER | 9950X POWERED</p>
+        <div class="confetti">✨ 🕺 ✨</div>
+      </div>
+    </body>
+    </html>
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webapp
-  labels:
-    app: webapp
 spec:
   replicas: 5
   selector:
@@ -15,17 +66,17 @@ spec:
         app: nginx
     spec:
       containers:
-      - image: nginx:latest
-        name: nginx
+      - name: nginx
+        image: nginx:latest
         ports:
         - containerPort: 80
-        resources:
-          limits:
-            cpu: 200m
-            memory: 256Mi
-          requests:
-            cpu: 100m
-            memory: 128Mi
+        volumeMounts:
+        - name: html-volume
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: html-volume
+        configMap:
+          name: webapp-html
 ---
 apiVersion: v1
 kind: Service
