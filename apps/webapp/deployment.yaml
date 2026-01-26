@@ -1,32 +1,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webapp-9950x
+  name: webapp
   labels:
     app: webapp
 spec:
-  replicas: 2
+  replicas: 5
   selector:
     matchLabels:
-      app: webapp
+      app: nginx
   template:
     metadata:
       labels:
-        app: webapp
+        app: nginx
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest
+      - image: nginx:latest
+        name: nginx
         ports:
         - containerPort: 80
+        resources:
+          limits:
+            cpu: 200m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: webapp-service
+  name: webapp
 spec:
   selector:
-    app: webapp
+    app: nginx
   ports:
     - protocol: TCP
       port: 80
