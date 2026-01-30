@@ -56,7 +56,7 @@ kind: Deployment
 metadata:
   name: webapp
 spec:
-  replicas: 17
+  replicas: 11
   selector:
     matchLabels:
       app: nginx
